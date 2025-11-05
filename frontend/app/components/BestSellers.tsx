@@ -10,7 +10,6 @@ const BestsellerCarousel = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(4);
 
-  // States for touch-based swipe navigation
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
@@ -24,13 +23,13 @@ const BestsellerCarousel = () => {
     { id: 7, name: 'Classic Midi Dress', brand: 'MOE', price: '$180.00', image: '/bestsellers/best7.webp', hoverImage: '/bestsellers/bestt7.webp', colors: ['black', 'navy'] },
   ];
 
-  // Determine items per page based on screen width to sync with Tailwind breakpoints
+
   useEffect(() => {
     const getItemsPerPage = () => {
       const width = window.innerWidth;
-      if (width < 1024) return 2; // for sm and md screens
-      if (width < 1280) return 3; // for lg screens
-      return 4; // for xl and larger screens
+      if (width < 1024) return 2; 
+      if (width < 1280) return 3; 
+      return 4; 
     };
 
     const handleResize = () => {
@@ -38,14 +37,13 @@ const BestsellerCarousel = () => {
       setItemsPerPage(getItemsPerPage());
     };
 
-    handleResize(); // Set initial values
+    handleResize(); 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const maxIndex = Math.max(0, products.length - itemsPerPage);
 
-  // Adjust current index if it becomes out of bounds after a resize
   useEffect(() => {
     if (currentIndex > maxIndex) {
       setCurrentIndex(maxIndex);
@@ -61,7 +59,7 @@ const BestsellerCarousel = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
-  // Touch handlers for swipe navigation
+  
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
@@ -86,7 +84,6 @@ const BestsellerCarousel = () => {
   const isNextDisabled = currentIndex >= maxIndex;
   const isPrevDisabled = currentIndex === 0;
 
-  // Progress bar calculations
   const indicatorWidthPercentage = (itemsPerPage / products.length) * 100;
   const totalMovableWidth = 100 - indicatorWidthPercentage;
   const indicatorLeftPosition = maxIndex > 0 ? (currentIndex / maxIndex) * totalMovableWidth : 0;
@@ -119,7 +116,7 @@ const BestsellerCarousel = () => {
                 style={{ width: `${100 / itemsPerPage}%` }}
               >
                 <div className="flex flex-col">
-                  {/* Product Image */}
+                 
                   <div
                     className="relative bg-gray-100 overflow-hidden mb-3 md:mb-4 w-full aspect-[2/3] rounded-lg cursor-grab active:cursor-grabbing"
                     onMouseEnter={() => setHoveredIndex(product.id)}
