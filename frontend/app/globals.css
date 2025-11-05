@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --font-outfit: var(--font-outfit);
+  --font-geist: var(--font-geist-sans);
+  --font-helvetica: var(--font-helvetica);
+  --font-kudrya: var(--font-kudryashev);
+  --font-integrated: var(--font-integrated);
+  --font-monument: var(--font-pp-monument);
+  --font-anton: var(--font-anton);
+}
+
+.title {
+  font-family: var(--font-pp-monument), sans-serif;
+}
+.title2 {
+  font-family: var(--font-integrated), sans-serif;
+  text-transform: none;
+}
+
+
+.title3 {
+  font-family: var(--font-anton), sans-serif;
+  font-weight: 400;
+
+
+    line-height: .9;
+}.title4 {
+  font-family: var(--font-helvetica), sans-serif;
+  text-transform: none;
+
+}
+.title5 {
+  font-family: var(--font-kudryashev), sans-serif;
+  text-transform: none;
+
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@layer utilities {
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
+}
