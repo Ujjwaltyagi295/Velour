@@ -187,11 +187,7 @@ const BestsellerCarousel = () => {
       </div>
 
 
-      {isMobile && (
-        <div className="flex justify-center mt-4 text-xs text-gray-400">
-          Swipe to see more
-        </div>
-      )}
+     
     </div>
   );
 };
