@@ -47,115 +47,84 @@ export default function ReelSection() {
     return products[index];
   };
 
+  const VideoWithFallback = ({ product, autoPlay = false }) => (
+    <video
+      ref={(el) => { if (el) videoRefs.current[product.id] = el; }}
+      className="w-full h-full object-cover"
+      autoPlay={autoPlay}
+      loop
+      muted
+      playsInline
+    >
+      <source src={product.video.replace('.mp4', '.webm')} type="video/webm" />
+      <source src={product.video} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+
   return (
     <div className="w-full mt-9 bg-white">
-      
       <div className="px-6 md:px-12 py-8 items-center flex flex-col">
         <h2 className="text-2xl md:text-2xl font-normal font-outfit mb-5">Reels</h2>
-        
-     
         <h2 className="text-3xl md:text-4xl font-[450] font-outfit leading-0.5">INSPIRATION</h2>
-
       </div>
 
       <div className="w-full h-screen bg-white relative flex flex-col items-center justify-center overflow-hidden group">
-        
+        {/* Desktop layout */}
         <div className="hidden md:flex items-center justify-center gap-4 w-full h-[85vh] transition-all duration-300">
-          
           <div className="flex-shrink-0 w-[15vw] h-[65vh] scale-90">
             <div className="relative w-full h-full bg-gray-900 rounded-lg overflow-hidden">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(-2).id] = el; }}
-                src={getProductForOffset(-2).video}
-                className="w-full h-full object-cover"
-                loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(-2)} />
             </div>
           </div>
 
           <div className="flex-shrink-0 w-[20vw] h-[75vh] scale-95">
             <div className="relative w-full h-full bg-gray-800 rounded-lg overflow-hidden">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(-1).id] = el; }}
-                src={getProductForOffset(-1).video}
-                className="w-full h-full object-cover"
-                loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(-1)} />
             </div>
           </div>
 
           <div className="flex-shrink-0 w-[25vw] h-[85vh] z-10">
             <div className="relative w-full h-full bg-gray-700 rounded-xl overflow-hidden shadow-2xl">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(0).id] = el; }}
-                src={getProductForOffset(0).video}
-                className="w-full h-full object-cover"
-                autoPlay loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(0)} autoPlay />
             </div>
           </div>
 
           <div className="flex-shrink-0 w-[20vw] h-[75vh] scale-95">
             <div className="relative w-full h-full bg-gray-800 rounded-lg overflow-hidden">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(1).id] = el; }}
-                src={getProductForOffset(1).video}
-                className="w-full h-full object-cover"
-                loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(1)} />
             </div>
           </div>
 
           <div className="flex-shrink-0 w-[15vw] h-[65vh] scale-90">
             <div className="relative w-full h-full bg-gray-900 rounded-lg overflow-hidden">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(2).id] = el; }}
-                src={getProductForOffset(2).video}
-                className="w-full h-full object-cover"
-                loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(2)} />
             </div>
           </div>
-
         </div>
 
+        {/* Mobile layout */}
         <div className="flex md:hidden items-center justify-center gap-2 w-full h-[85vh] transition-all duration-300 px-2">
-          
           <div className="flex-shrink-0 w-[12vw] h-[50vh] scale-75">
             <div className="relative w-full h-full bg-gray-900 rounded-lg overflow-hidden">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(-1).id] = el; }}
-                src={getProductForOffset(-1).video}
-                className="w-full h-full object-cover"
-                loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(-1)} />
             </div>
           </div>
 
           <div className="flex-shrink-0 w-[70vw] h-[80vh] z-10">
             <div className="relative w-full h-full bg-gray-700 rounded-xl overflow-hidden shadow-2xl">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(0).id] = el; }}
-                src={getProductForOffset(0).video}
-                className="w-full h-full object-cover"
-                autoPlay loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(0)} autoPlay />
             </div>
           </div>
 
           <div className="flex-shrink-0 w-[12vw] h-[50vh] scale-75">
             <div className="relative w-full h-full bg-gray-900 rounded-lg overflow-hidden">
-              <video
-                ref={(el) => { if (el) videoRefs.current[getProductForOffset(1).id] = el; }}
-                src={getProductForOffset(1).video}
-                className="w-full h-full object-cover"
-                loop muted playsInline
-              />
+              <VideoWithFallback product={getProductForOffset(1)} />
             </div>
           </div>
-
         </div>
 
+        {/* Product info overlay */}
         <div className="absolute bottom-[10vh] left-1/2 -translate-x-1/2 z-20 w-80 max-w-[calc(100%-32px)]">
           <div className="flex items-start gap-3 p-3 bg-white text-black backdrop-blur-md rounded-lg">
             <div className="w-15 h-14 bg-gray-400 rounded-lg flex-shrink-0">
@@ -179,6 +148,7 @@ export default function ReelSection() {
           </div>
         </div>
 
+        {/* Dots navigation */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2 justify-center">
           {products.map((_, index) => (
             <button
@@ -193,6 +163,7 @@ export default function ReelSection() {
           ))}
         </div>
 
+        {/* Navigation arrows */}
         <button
           onClick={handlePrevious}
           className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-white/80 border border-gray-300 hover:bg-white p-2 rounded-full shadow-lg group-hover:opacity-100 transition-opacity z-30"
@@ -205,9 +176,7 @@ export default function ReelSection() {
         >
           <ChevronRight size={24} className="text-gray-900" />
         </button>
-
       </div>
-
     </div>
   );
 }
