@@ -89,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <body
         className={`${geistSans.variable} ${outfit.variable} ${Kudrya.variable} ${Helvetica.variable} ${inter.variable} ${anton.variable} ${Integrated.variable} ${ppMonument.variable} ${geistMono.variable} antialiased`}
       >
